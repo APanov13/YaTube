@@ -258,23 +258,23 @@ class FollowTest(TestCase):
     def test_new_post_in_following_page(self):
         """Пост появляется в ленте у тех, кто подписан."""
         response = self.user_1_client.get(reverse('posts:follow_index'))
-        post_count = len(response.context.get('page').object_list)
+        post_count = len(response.context.get('page_obj').object_list)
         Post.objects.create(
             text='Тестовый текст для нового поста',
             author=FollowTest.user,
         )
         response = self.user_1_client.get(reverse('posts:follow_index'))
-        post_count1 = len(response.context.get('page').object_list)
+        post_count1 = len(response.context.get('page_obj').object_list)
         self.assertEqual(post_count + 1, post_count1)
 
     def test_new_post_in_following_page(self):
-        """Пост появляется в ленте у тех, кто подписан."""
+        """Пост не появляется в ленте у тех, кто подписан."""
         response = self.user_2_client.get(reverse('posts:follow_index'))
-        post_count = len(response.context.get('page').object_list)
+        post_count = len(response.context.get('page_obj').object_list)
         Post.objects.create(
             text='Тестовый текст для нового поста',
             author=FollowTest.user,
         )
         response = self.user_2_client.get(reverse('posts:follow_index'))
-        post_count1 = len(response.context.get('page').object_list)
+        post_count1 = len(response.context.get('page_obj').object_list)
         self.assertEqual(post_count, post_count1)

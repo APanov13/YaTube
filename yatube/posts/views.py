@@ -130,11 +130,11 @@ def follow_index(request):
     title = 'Страница с избранными авторами'
     paginator = Paginator(posts_author, 10)
     page_number = request.GET.get('page')
-    page = paginator.get_page(page_number)
+    page_obj = paginator.get_page(page_number)
     context = {
         'title': title,
         'paginator': paginator,
-        'page': page,
+        'page_obj': page_obj,
     }
     return render(request, 'posts/follow.html', context)
 
