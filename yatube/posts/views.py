@@ -21,6 +21,8 @@ def paginator_for_all(data_for_paginator, request):
         'page_obj': page_obj,
     }
 
+
+@cache_page(20)
 def index(request):
     posts = Post.objects.all()
     title = 'Это главная страница проекта Yatube'
