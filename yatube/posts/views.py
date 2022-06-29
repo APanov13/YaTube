@@ -2,6 +2,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.cache import cache_page
 
 from .forms import CommentForm, PostForm
 from .models import Follow, Group, Post
@@ -19,7 +20,6 @@ def paginator_for_all(data_for_paginator, request):
         'page_number': page_number,
         'page_obj': page_obj,
     }
-
 
 def index(request):
     posts = Post.objects.all()
@@ -145,14 +145,6 @@ def profile_follow(request, username):
     if request.user != follow_user:
         Follow.objects.get_or_create(user=request.user, author=follow_user)
     return redirect('posts:profile', username=username)
-# @login_required
-# def profile_follow(request, username):
-#     user = request.user
-#     author = User.objects.get(username=username)
-#     is_follower = Follow.objects.filter(user=user, author=author)
-#     if user != author and not is_follower.exists():
-#         Follow.objects.create(user=user, author=author)
-#     return redirect('posts:profile', username=author)
 
 
 @login_required
@@ -162,23 +154,3 @@ def profile_unfollow(request, username):
     if is_follower.exists():
         is_follower.delete()
     return redirect('posts:profile', username=username)
-# @login_required
-# def profile_follow(request, username):
-#     follow_author = get_object_or_404(User, username=username)
-#     if request.user != follow_author:
-#         Follow.objects.get_or_create(
-#             user=request.user,
-#             author=follow_author,
-#         )
-#     return redirect('posts:profile', username=username)
-
-
-# @login_required
-# def profile_unfollow(request, username):
-#     unfollow_author = get_object_or_404(User, username=username)
-#     get_object_or_404(
-#         Follow,
-#         user=request.user,
-#         author=unfollow_author
-#     ).delete()
-#     return redirect('posts:profile', username=username)
