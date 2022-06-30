@@ -1,10 +1,8 @@
 {% extends 'base.html' %}
 <title>{% block title %}{{title}}{% endblock %}</title>
-{% load cache %}
 {% load thumbnail %}
 {% block content %}
 {% include 'posts/includes/switcher.html' %}
-{% cache 20 index_page page_obj.number %}
   <main>
     <div class="container py-5">
       <h1>Последние обновления на сайте</h1>
@@ -32,6 +30,5 @@
     </div>  
   </main>
   {% include 'posts/includes/paginator.html' %}
-{% endcache %} 
 {% endblock %} 
 

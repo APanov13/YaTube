@@ -1,3 +1,4 @@
+from django.core.cache import cache
 from http import HTTPStatus
 from django.contrib.auth import get_user_model
 from django.test import Client, TestCase
@@ -30,6 +31,7 @@ class PostURLTests(TestCase):
         self.user = User.objects.create_user(username='NoName2')
         self.authorized_client = Client()
         self.authorized_client.force_login(self.user)
+        cache.clear()
 
     def test_home_url_exists_at_desired_location(self):
         """Страница / доступна любому пользователю."""

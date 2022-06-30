@@ -1,12 +1,14 @@
 import shutil
 import tempfile
 from http import HTTPStatus
+
 from django.conf import settings
+from django.core.cache import cache
 from django.core.files.uploadedfile import SimpleUploadedFile
-from posts.forms import PostForm
-from posts.models import Post
 from django.test import Client, TestCase, override_settings
 from django.urls import reverse
+from posts.forms import PostForm
+from posts.models import Post
 
 from ..models import Group, User
 
@@ -33,6 +35,9 @@ class PostCreateFormTests(TestCase):
             author=cls.user,
         )
         cls.form = PostForm()
+
+        def setUp(self) -> None:
+            cache.clear()
 
     @classmethod
     def tearDownClass(cls):
