@@ -1,3 +1,30 @@
 # hw05_final
+### Описание:
+Платформа для блогов — с авторизацией, персональными лентами, с комментариями
+и подпиской на авторов.
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+***
+### Как запустить проект:
+```
+git clone git@github.com:APanov13/hw05_final.git
+```
+Создать и активировать виртуальное окружение:
+```
+python -m venv venv
+
+source venv/bin/activate
+
+```
+Установить зависимости из файла requirements.txt:
+```
+pip install -r requirements.txt
+```
+Выполнить миграции:
+```
+python manage.py migrate
+```
+Запустить сервер:
+```
+python manage.py runserver
+```
+Наслаждаться! :)
