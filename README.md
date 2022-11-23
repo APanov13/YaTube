@@ -9,6 +9,8 @@
 * Django 2.2.16
 * Git
 * SQLite3
+* HTML
+* CSS
 
 ***
 ### Запуск проекта:
